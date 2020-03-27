@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewData["Title"] = "Active Game";
+}
+<link href="~/css/Puzzle.css" rel="stylesheet" />
+<h1>Active Game</h1>
+
+<section>
+    <canvas id="puzzleCanvas" width="1000" height="800">
+    </canvas>
+    <div id="previewArea">
+        <img id="previewImage" src="~/Images/fruity-pebbles.jpg" width="200" height="200" />
+        @*<img id="previewImage" src="~/Images/Emo Panflute Album Cover.jpg" width="200" height="200" />*@
+    </div>
+</section>
+
+@section Scripts {
+
+    <script src="~/lib/lodash/lodash.min.js"></script>
+    <script src="~/microsoft/signalr/dist/browser/signalr.js"></script>
+
+    <script src="~/js/PuzzlePlay/GameArea.js"></script>
+    <script src="~/js/PuzzlePlay/PuzzlePieceHolder.js"></script>
+    <script src="~/js/PuzzlePlay/PuzzlePiece.js"></script>
+    <script src="~/js/PuzzlePlay/PuzzleGame.js"></script>
+    <script src="~/js/PuzzlePlay/ActiveGame.js"></script>
+}
