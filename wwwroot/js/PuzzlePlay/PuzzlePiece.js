@@ -8,7 +8,8 @@
     x,
     y,
     imageHeight,
-    imageWidth
+    imageWidth,
+    borderColor
 ) {
     this.width = width;
     this.height = height;
@@ -19,8 +20,7 @@
     this.imageHeight = imageHeight;
     this.imageWidth = imageWidth;
     this.pieceHolder = new puzzlePieceHolder(this);
-
-    this.borderColor = "#A7A2A1";
+    this.borderColor = borderColor;
 
     this.update = function () {
         ctx = gameArea.context;

@@ -1,8 +1,17 @@
-﻿function puzzleGame(gameArea, image, numberOfPiecesHigh, numberOfPiecesWide, squareHeight, squareWidth) {
+﻿function puzzleGame(
+    gameArea,
+    image,
+    numberOfPiecesHigh,
+    numberOfPiecesWide,
+    squareHeight,
+    squareWidth,
+    playerColor
+) {
     this.numberOfPiecesHigh = numberOfPiecesHigh;
     this.numberOfPiecesWide = numberOfPiecesWide;
     this.squareHeight = squareHeight;
     this.squareWidth = squareWidth;
+    this.playerColor = playerColor;
 
     this.pieceHeight = squareHeight / numberOfPiecesHigh;
     this.pieceWidth = squareWidth / numberOfPiecesWide;
@@ -29,7 +38,9 @@
                         (this.pieceWidth + 5) * column,
                         (this.pieceHeight + 5) * row,
                         pieceImageHeight,
-                        pieceImageWidth));
+                        pieceImageWidth,
+                        this.playerColor
+                    ));
             }
         }
     };
@@ -55,26 +66,26 @@
     };
     this.scatter = function (xmin, xmax, ymin, ymax) {
         ////Random
-        //for (var row = 0; row < this.numberOfPiecesHigh; row++) {
-        //    for (var column = 0; column < this.numberOfPiecesWide; column++) {
-        //        var randomx = xmin + Math.random() * (xmax - xmin);
-        //        var randomy = ymin + Math.random() * (ymax - ymin);
-
-        //        var piece = this.puzzle[row][column];
-        //        piece.relocate(randomx, randomy);
-        //    }
-        //}
-
-        //deterministic
         for (var row = 0; row < this.numberOfPiecesHigh; row++) {
             for (var column = 0; column < this.numberOfPiecesWide; column++) {
-                var randomx = xmin + (Math.exp(row * column) * 50 + Math.exp(column - row) * 117) % (xmax - xmin);
-                var randomy = ymin + (Math.exp(row - column) * 202 + Math.exp(column) * 59) % (ymax - ymin);
+                var randomx = xmin + Math.random() * (xmax - xmin);
+                var randomy = ymin + Math.random() * (ymax - ymin);
 
                 var piece = this.puzzle[row][column];
                 piece.relocate(randomx, randomy);
             }
         }
+
+        //deterministic
+        //for (var row = 0; row < this.numberOfPiecesHigh; row++) {
+        //    for (var column = 0; column < this.numberOfPiecesWide; column++) {
+        //        var randomx = xmin + (Math.exp(row * column) * 50 + Math.exp(column - row) * 117) % (xmax - xmin);
+        //        var randomy = ymin + (Math.exp(row - column) * 202 + Math.exp(column) * 59) % (ymax - ymin);
+
+        //        var piece = this.puzzle[row][column];
+        //        piece.relocate(randomx, randomy);
+        //    }
+        //}
     };
     this.getClickedPiece = function (x, y) {
         for (var row = this.numberOfPiecesHigh - 1; row >= 0; row--) {

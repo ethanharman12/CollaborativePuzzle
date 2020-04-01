@@ -2,15 +2,40 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CollaborativePuzzle.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace CollaborativePuzzle.Controllers
 {
     public class GameController : Controller
     {
+        private IMemoryCache Cache;
+
+        public GameController(IMemoryCache cache)
+        {
+            Cache = cache;
+        }
+
+        [Route("/Game/{gameId}")]
         public IActionResult Index(string gameId)
         {
-            return View("ActiveGame");
+            GameViewModel viewModel = GetDefaultGame();
+
+            if (!string.IsNullOrEmpty(gameId))
+            {
+                if (!Cache.TryGetValue(gameId, out viewModel))
+                {
+                    viewModel = GetDefaultGame();
+                }
+            }
+
+            return View("ActiveGame", viewModel);
+        }
+
+        public IActionResult Default()
+        {
+            return View("ActiveGame", GetDefaultGame());
         }
 
         public IActionResult New()
@@ -19,9 +44,22 @@ namespace CollaborativePuzzle.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create()
+        public IActionResult Create(GameViewModel game)
         {
-            return RedirectToAction("Index", new { gameId = "1234" });
+            game.GameId = game.Title.Replace(" ", string.Empty);
+            Cache.Set(game.GameId, game);
+
+            return RedirectToAction("Index", new { game.GameId });
+        }
+
+        private GameViewModel GetDefaultGame()
+        {
+            return new GameViewModel
+            {
+                Title = "Puzzle",
+                GameId = "1234",
+                ImagePath = "~/Images/Emo Panflute Album Cover.jpg"
+            };
         }
     }
 }

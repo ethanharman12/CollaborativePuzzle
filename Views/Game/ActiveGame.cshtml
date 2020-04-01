@@ -1,18 +1,28 @@
-﻿
+﻿@model GameViewModel
 @{
-    ViewData["Title"] = "Active Game";
+    ViewData["Title"] = Model.Title;
 }
 <link href="~/css/Puzzle.css" rel="stylesheet" />
-<h1>Active Game</h1>
+<h1>@Model.Title</h1>
 
-<section>
-    <canvas id="puzzleCanvas" width="1000" height="800">
-    </canvas>
-    <div id="previewArea">
-        <img id="previewImage" src="~/Images/fruity-pebbles.jpg" width="200" height="200" />
-        @*<img id="previewImage" src="~/Images/Emo Panflute Album Cover.jpg" width="200" height="200" />*@
-    </div>
-</section>
+@Html.HiddenFor(m => m.GameId)
+
+<div>    
+    <section id="puzzleSection">
+        <canvas id="puzzleCanvas" width="1000" height="800" style="float: left; margin: 0px 20px 20px 20px;">
+        </canvas>
+        <div>
+            <div id="previewArea">
+                @*<img id="previewImage" src="~/Images/fruity-pebbles.jpg" width="200" height="200" />
+            <img id="previewImage" src="@Model.ImagePath" width="200" height="200" />*@
+                <img id="previewImage" src="@Url.Content(Model.ImagePath)" width="200" height="200" />
+            </div>
+            <div id="friendSection">
+                <h2>Friends:</h2>
+            </div>
+        </div>
+    </section>    
+</div>
 
 @section Scripts {
 
