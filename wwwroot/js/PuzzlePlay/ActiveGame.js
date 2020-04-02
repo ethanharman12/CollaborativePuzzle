@@ -25,6 +25,9 @@ function startGame() {
     }
     
     gameId = document.getElementById("GameId").value;
+    rowCount = document.getElementById("NumberOfRows").value;
+    columnCount = document.getElementById("NumberOfColumns").value;
+    
     gameArea = new gameArea(canvasId, 20);
     puzzleGame = new puzzleGame(gameArea, image, rowCount, columnCount, 500, 500, playerColor);
     puzzleGame.cutPieces();

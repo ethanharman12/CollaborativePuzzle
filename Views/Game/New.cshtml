@@ -1,25 +1,62 @@
-﻿
+﻿@model GameViewModel
 @{
     ViewData["Title"] = "New Game";
 }
 
 <h1>New Game</h1>
 
-<form asp-action="Create" asp-controller="Game">
+<form asp-action="Create" asp-controller="Game" enctype="multipart/form-data">
 
     <h3>Picture</h3>
+    <div>
+        <label>Upload Image</label>
+        <input type='file' id="imageFile" name="imageFile" />
+    </div>    
+    <div>
+        <label>Display Preview</label>
+        <input asp-for="DisplayPreview" value="true" />
+    </div>
     <h3>Pieces</h3>
-    <h3>Name</h3>
-    <h3>Players</h3>
-    <h3>Restrictions</h3>
+    <div>
+        <label>Puzzle Grid Size</label>
+        <input type="number" name="numberOfRows" autocomplete="off" value="4" /> x
+        <input type="number" name="numberOfColumns" autocomplete="off" value="4" />
+    </div>
 
+    <h3>Name</h3>
     <div>
         <label>Title</label>
-        <input type="text" name="title" autocomplete="off" value="Fruity Pebbles"/>
+        <input type="text" name="title" autocomplete="off" value="Fruity Pebbles" />
     </div>
-    <div>
-        <label>Image Path</label>
-        <input type="text" name="imagePath" autocomplete="off" value="~/Images/fruity-pebbles.jpg" />
-    </div>
+    <h3>Players</h3>
+    Max Players?
+    Private vs Public?
+    <h3>Restrictions</h3>
+    Limit # of snaps per user?
+    <h3>Misc</h3>
+    Celebration Type
+
     <input type="submit" value="Create" />
+
+    <img id="blah" src="#" alt="your image" />
 </form>
+
+@section scripts {
+    <script type="text/javascript">
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#blah').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]); // convert to base64 string
+            }
+        }
+
+        $("#imageFile").change(function () {
+            readURL(this);
+        });
+    </script>
+}

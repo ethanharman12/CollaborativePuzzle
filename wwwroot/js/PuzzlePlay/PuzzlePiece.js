@@ -38,7 +38,7 @@
 
         if (this.borderColor) {
             ctx.beginPath();
-            ctx.lineWidth = "2";
+            ctx.lineWidth = "3";
             ctx.strokeStyle = this.borderColor;
             ctx.rect(
                 this.x,

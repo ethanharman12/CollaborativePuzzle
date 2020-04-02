@@ -46,6 +46,7 @@ namespace CollaborativePuzzle.Controllers
         [HttpPost]
         public IActionResult Create(GameViewModel game)
         {
+            game.ImageString = game.GetImageString();
             game.GameId = game.Title.Replace(" ", string.Empty);
             Cache.Set(game.GameId, game);
 
