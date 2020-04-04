@@ -2,7 +2,6 @@
 const canvasId = "puzzleCanvas";
 const imageId = "previewImage";
 const friendSectionId = "friendSection";
-const image = document.getElementById(imageId);
 var puzzleGame;
 var gameArea;
 var currentPiece;
@@ -16,20 +15,22 @@ var gameId;
 var userName;
 var rowCount = 8;
 var columnCount = 8;
+var isVideo;
+const image = document.getElementById(imageId);
 
 function startGame() {
+    if (isVideo) {
+        image.removeEventListener('play', startGame);
+    }
+    
     userName = window.localStorage.getItem("userName");
     if (!userName) {
         userName = prompt("User Name:");
         window.localStorage.setItem("userName", userName);
     }
     
-    gameId = document.getElementById("GameId").value;
-    rowCount = document.getElementById("NumberOfRows").value;
-    columnCount = document.getElementById("NumberOfColumns").value;
-    
     gameArea = new gameArea(canvasId, 20);
-    puzzleGame = new puzzleGame(gameArea, image, rowCount, columnCount, 500, 500, playerColor);
+    puzzleGame = new puzzleGame(gameArea, image, isVideo, rowCount, columnCount, 500, 500, playerColor);
     puzzleGame.cutPieces();
     puzzleGame.scatter(50, 900, 50, 700);
 
@@ -176,5 +177,15 @@ function gameOver() {
 }
 
 $(document).ready(function () {
-    startGame();
+    gameId = document.getElementById("GameId").value;
+    rowCount = document.getElementById("NumberOfRows").value;
+    columnCount = document.getElementById("NumberOfColumns").value;
+    isVideo = document.getElementById("IsVideo").value === 'True';
+
+    if (isVideo) {
+        image.addEventListener('play', startGame, false);
+    }
+    else {
+        startGame();
+    }
 });

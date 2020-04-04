@@ -19,24 +19,34 @@ namespace CollaborativePuzzle.Models
         public int NumberOfRows { get; set; }
         public int NumberOfColumns { get; set; }
         public bool DisplayPreview { get; set; }
+        public bool IsVideo { get; set; }
 
         public GameViewModel()
         {
             Players = new List<Player>();
         }
 
-        public string GetImageString()
+        public string GetFileString()
         {
-            string imageString;
+            string fileString;
 
             using (MemoryStream ms = new MemoryStream())
             {
                 ImageFile.CopyTo(ms);
                 byte[] array = ms.GetBuffer();
-                imageString = Convert.ToBase64String(array);
+                fileString = Convert.ToBase64String(array);
             }
 
-            return imageString;
+            return fileString;
+        }
+
+        private readonly string[] videoExtensions = {
+            ".GIF", ".MIDI", ".OGG", ".AVI", ".MP4", ".WMV"
+        };
+
+        public bool GetIsVideo()
+        {
+            return videoExtensions.Contains(Path.GetExtension(ImageFile.FileName), StringComparer.OrdinalIgnoreCase);
         }
     }
 }

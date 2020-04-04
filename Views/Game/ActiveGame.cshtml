@@ -8,6 +8,7 @@
 @Html.HiddenFor(m => m.GameId)
 @Html.HiddenFor(m => m.NumberOfColumns)
 @Html.HiddenFor(m => m.NumberOfRows)
+@Html.HiddenFor(m => m.IsVideo)
 
 <div>
     <section id="puzzleSection">
@@ -16,11 +17,21 @@
         <div>
             <div id="previewArea">
                 @*<img id="previewImage" src="~/Images/fruity-pebbles.jpg" width="200" height="200" />
-                    <img id="previewImage" src="@Model.ImagePath" width="200" height="200" />
-                        <img id="previewImage" src="@Url.Content(Model.ImagePath)" width="200" height="200" />*@
+                <img id="previewImage" src="@Model.ImagePath" width="200" height="200" />
+                <img id="previewImage" src="@Url.Content(Model.ImagePath)" width="200" height="200" />*@
 
-
-                <img id="previewImage" src="@String.Format("data:image/png;base64,{0}", Model.ImageString)" @if (!Model.DisplayPreview) { <text>style="display:none"</text> } />
+                @if (Model.IsVideo)
+                {
+                    <video loop id="previewImage" autoplay muted width="200" height="200">
+                        @*<source src="~/Video/VID_20191125_175117.mp4" type="video/mp4" />*@
+                        <source src="@String.Format("data:video/mp4;base64,{0}", Model.ImageString)" />
+                    </video>
+                }
+                else
+                {
+                    <img id="previewImage" width="200" height="200"
+                         src="@String.Format("data:image/png;base64,{0}", Model.ImageString)" @if (!Model.DisplayPreview) { <text> style="display:none" </text> } />
+                }
             </div>
             <div id="friendSection">
                 <h2>Friends:</h2>

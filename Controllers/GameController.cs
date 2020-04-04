@@ -46,7 +46,8 @@ namespace CollaborativePuzzle.Controllers
         [HttpPost]
         public IActionResult Create(GameViewModel game)
         {
-            game.ImageString = game.GetImageString();
+            game.ImageString = game.GetFileString();
+            game.IsVideo = game.GetIsVideo();
             game.GameId = game.Title.Replace(" ", string.Empty);
             Cache.Set(game.GameId, game);
 
@@ -59,7 +60,11 @@ namespace CollaborativePuzzle.Controllers
             {
                 Title = "Puzzle",
                 GameId = "1234",
-                ImagePath = "~/Images/Emo Panflute Album Cover.jpg"
+                ImagePath = "~/Images/Emo Panflute Album Cover.jpg",
+                NumberOfColumns = 4,
+                NumberOfRows = 4,
+                DisplayPreview = true,
+                ImageFile = null
             };
         }
     }

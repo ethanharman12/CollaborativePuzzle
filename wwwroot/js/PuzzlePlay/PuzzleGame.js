@@ -1,6 +1,7 @@
 ﻿function puzzleGame(
     gameArea,
     image,
+    isVideo,
     numberOfPiecesHigh,
     numberOfPiecesWide,
     squareHeight,
@@ -18,11 +19,20 @@
 
     this.puzzle = [];
     this.snapCount = 0;
+    this.isVideo = isVideo;
 
     this.cutPieces = function () {
 
-        var pieceImageHeight = Math.ceil(image.naturalHeight / this.numberOfPiecesHigh);
-        var pieceImageWidth = Math.ceil(image.naturalWidth / this.numberOfPiecesWide);
+        var imageHeight = image.naturalHeight;
+        var imageWidth = image.naturalWidth;
+
+        if (this.isVideo) {
+            imageHeight = image.videoHeight;
+            imageWidth = image.videoWidth;
+        }
+
+        var pieceImageHeight = Math.ceil(imageHeight / this.numberOfPiecesHigh);
+        var pieceImageWidth = Math.ceil(imageWidth / this.numberOfPiecesWide);
 
         for (var row = 0; row < this.numberOfPiecesHigh; row++) {
             this.puzzle.push([]);
