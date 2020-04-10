@@ -21,6 +21,8 @@ namespace CollaborativePuzzle.Models
         public bool DisplayPreview { get; set; }
         public bool IsVideo { get; set; }
 
+        public string GiphyUrl { get; set; }
+
         public GameViewModel()
         {
             Players = new List<Player>();

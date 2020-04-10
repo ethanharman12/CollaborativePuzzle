@@ -12,9 +12,9 @@
 
 <div>
     <section id="puzzleSection">
-        <canvas id="puzzleCanvas" width="1000" height="800" style="float: left; margin: 0px 20px 20px 20px;">
+        <canvas id="puzzleCanvas" width="1000" height="700" style="float: left; margin: 0px 20px 20px 20px;">
         </canvas>
-        <div>
+        <div class="row">
             <div id="previewArea">
                 @*<img id="previewImage" src="~/Images/fruity-pebbles.jpg" width="200" height="200" />
                 <img id="previewImage" src="@Model.ImagePath" width="200" height="200" />
@@ -22,10 +22,17 @@
 
                 @if (Model.IsVideo)
                 {
-                    <video loop id="previewImage" autoplay muted width="200" height="200">
-                        @*<source src="~/Video/VID_20191125_175117.mp4" type="video/mp4" />*@
-                        <source src="@String.Format("data:video/mp4;base64,{0}", Model.ImageString)" />
-                    </video>
+                <video loop id="previewImage" autoplay muted width="200" height="200">
+                    @*<source src="~/Video/VID_20191125_175117.mp4" type="video/mp4" />*@
+                    @if (!string.IsNullOrEmpty(Model.GiphyUrl))
+                    {
+                        <source src="@Model.GiphyUrl" />                        
+                    }
+                    else
+                    {
+                        <source src="@String.Format("data:video/mp4;base64,{0}", Model.ImageString)" />                        
+                    }
+                </video>
                 }
                 else
                 {

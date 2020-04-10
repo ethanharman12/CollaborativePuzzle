@@ -1,20 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using CollaborativePuzzle.Models;
+﻿using CollaborativePuzzle.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Configuration;
+using System;
+using System.Linq;
 
 namespace CollaborativePuzzle.Controllers
 {
     public class GameController : Controller
     {
         private IMemoryCache Cache;
+        private readonly string[] blackListedNames = { 
+            "Index", 
+            "Default",
+            "New",
+            "Create",
+            ""
+        };
 
-        public GameController(IMemoryCache cache)
+        public IConfiguration Configuration { get; }
+
+        public GameController(IMemoryCache cache, IConfiguration configuration)
         {
-            Cache = cache;
+            Cache = cache; 
+            Configuration = configuration;
         }
 
         [Route("/Game/{gameId}")]
@@ -46,9 +55,23 @@ namespace CollaborativePuzzle.Controllers
         [HttpPost]
         public IActionResult Create(GameViewModel game)
         {
-            game.ImageString = game.GetFileString();
-            game.IsVideo = game.GetIsVideo();
+            if(!string.IsNullOrEmpty(game.GiphyUrl))
+            {
+                game.IsVideo = true;
+            }
+            else
+            {
+                game.ImageString = game.GetFileString();
+                game.IsVideo = game.GetIsVideo();
+            }
+            
             game.GameId = game.Title.Replace(" ", string.Empty);
+
+            while (Cache.TryGetValue(game.GameId, out var value) || blackListedNames.Contains(game.GameId))
+            {
+                game.GameId += "1";
+            }
+
             Cache.Set(game.GameId, game);
 
             return RedirectToAction("Index", new { game.GameId });

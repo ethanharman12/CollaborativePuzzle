@@ -3,5 +3,5 @@ bin
 obj
 Properties/PublishProfiles/RemotePuzzle - Web Deploy.pubxml
 obj/Debug/netcoreapp3.1/Razor/Views/Game/ActiveGame.cshtml.g.cs
-obj/Debug/netcoreapp3.1/Razor/Views/Game/ActiveGame.cshtml.g.cs
 obj/Debug/netcoreapp3.1/CollaborativePuzzle.csproj.FileListAbsolute.txt
+obj/project.assets.json

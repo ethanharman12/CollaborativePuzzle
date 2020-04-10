@@ -5,59 +5,57 @@
 
 <h1>New Game</h1>
 
-<form asp-action="Create" asp-controller="Game" enctype="multipart/form-data">
+<div class="row">
+    <div class="col-md-3">
+        <form asp-action="Create" asp-controller="Game" enctype="multipart/form-data">
 
-    <h3>Picture</h3>
-    <div>
-        <label>Upload Image</label>
-        <input type='file' id="imageFile" name="imageFile" />
-    </div>    
-    <div>
-        <label>Display Preview</label>
-        <input asp-for="DisplayPreview" value="true" />
+            <h3>Name</h3>
+            <div>
+                <label>Title</label>
+                <input type="text" id="title" name="title" autocomplete="off" />
+            </div>
+            <h3>Picture</h3>
+            <div>
+                <label>Upload Image</label>
+                <input type='file' id="imageFile" name="imageFile" />
+                <br />
+                <label>Or Randomize</label>
+                <button type="button" id="giphyButton">Giphy</button><button type="button" id="stickerButton">Giphy Sticker</button>
+            </div>
+            <div>
+                <label>Display Preview</label>
+                <input asp-for="DisplayPreview" value="true" />
+            </div>
+            <h3>Pieces</h3>
+            <div>
+                <label>Puzzle Grid Size</label>
+                <input type="number" name="numberOfRows" autocomplete="off" value="4" /> x
+                <input type="number" name="numberOfColumns" autocomplete="off" value="4" />
+            </div>
+
+            <h3>Players</h3>
+            Max Players?
+            Private vs Public?
+            <h3>Restrictions</h3>
+            Limit # of snaps per user?
+            <h3>Misc</h3>
+            Celebration Type
+
+            <br />
+            <input type="submit" value="Create" />
+
+
+            <input type="hidden" id="giphyUrl" name="giphyUrl" />
+        </form>
     </div>
-    <h3>Pieces</h3>
-    <div>
-        <label>Puzzle Grid Size</label>
-        <input type="number" name="numberOfRows" autocomplete="off" value="4" /> x
-        <input type="number" name="numberOfColumns" autocomplete="off" value="4" />
+    <div class="col-md-9">
+        <img id="imagePreview" src="#" alt="your image" style="display:none;" />
+        <video autoplay loop id="giphy" style="display:none;">
+            <source id="giphySource" src="https://media1.giphy.com/media/kzyR9Mzm3eICaPj4ow/giphy.mp4?cid=e3b0c4426965a7b978dfd1aa9abdd9c932698b60086676c8&rid=giphy.mp4" />
+        </video>
     </div>
-
-    <h3>Name</h3>
-    <div>
-        <label>Title</label>
-        <input type="text" name="title" autocomplete="off" />
-    </div>
-    <h3>Players</h3>
-    Max Players?
-    Private vs Public?
-    <h3>Restrictions</h3>
-    Limit # of snaps per user?
-    <h3>Misc</h3>
-    Celebration Type
-
-    <br />
-    <input type="submit" value="Create" />
-
-    <img id="blah" src="#" alt="your image" />
-</form>
+</div>
 
 @section scripts {
-    <script type="text/javascript">
-        function readURL(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-
-                reader.onload = function (e) {
-                    $('#blah').attr('src', e.target.result);
-                }
-
-                reader.readAsDataURL(input.files[0]); // convert to base64 string
-            }
-        }
-
-        $("#imageFile").change(function () {
-            readURL(this);
-        });
-    </script>
+    <script src="~/js/New.js"></script>
 }
