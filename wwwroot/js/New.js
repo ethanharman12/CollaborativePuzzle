@@ -63,4 +63,7 @@ function getSticker() {
 $(document).ready(function () {
     $("#giphyButton").click(getGiphy);
     $("#stickerButton").click(getSticker);
+    $("#imageUrl").change(function () {
+        $("#giphyUrl").val($("#imageUrl").val());
+    });
 });

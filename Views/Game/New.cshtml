@@ -5,52 +5,54 @@
 
 <h1>New Game</h1>
 
-<div class="row">
+<div class="row" style="margin-right:0px;margin-left:0px;">
     <div class="col-md-3">
         <form asp-action="Create" asp-controller="Game" enctype="multipart/form-data">
 
             <h3>Name</h3>
-            <div>
+            <div class="form-group">
                 <label>Title</label>
                 <input type="text" id="title" name="title" autocomplete="off" />
             </div>
             <h3>Picture</h3>
-            <div>
-                <label>Upload Image</label>
+            <div class="form-group">
+                <label>Upload Image:</label>
                 <input type='file' id="imageFile" name="imageFile" />
                 <br />
-                <label>Or Randomize</label>
-                <button type="button" id="giphyButton">Giphy</button><button type="button" id="stickerButton">Giphy Sticker</button>
+                <label>Or Randomize:</label>
+                <button type="button" id="giphyButton">Giphy</button><button type="button" id="stickerButton">Giphy Sticker</button>                
+                <br />
+                <label>Or Link:</label>
+                <input type='text' id="imageUrl" name="imageUrl" />
             </div>
-            <div>
+            <div class="form-group">
                 <label>Display Preview</label>
-                <input asp-for="DisplayPreview" value="true" />
+                <input asp-for="DisplayPreview" value="true" checked="checked" />
             </div>
             <h3>Pieces</h3>
-            <div>
+            <div class="form-group">
                 <label>Puzzle Grid Size</label>
-                <input type="number" name="numberOfRows" autocomplete="off" value="4" /> x
-                <input type="number" name="numberOfColumns" autocomplete="off" value="4" />
+                <input type="number" name="numberOfRows" autocomplete="off" value="4" style="width:50px" /> x
+                <input type="number" name="numberOfColumns" autocomplete="off" value="4" style="width:50px"  />
             </div>
 
-            <h3>Players</h3>
+            @*<h3>Players</h3>
             Max Players?
             Private vs Public?
             <h3>Restrictions</h3>
             Limit # of snaps per user?
             <h3>Misc</h3>
-            Celebration Type
+            Celebration Type*@
 
             <br />
             <input type="submit" value="Create" />
-
 
             <input type="hidden" id="giphyUrl" name="giphyUrl" />
         </form>
     </div>
     <div class="col-md-9">
-        <img id="imagePreview" src="#" alt="your image" style="display:none;" />
-        <video autoplay loop id="giphy" style="display:none;">
+        <img id="imagePreview" src="#" alt="your image" style="display:none;width:400px;height:400px;" />
+        <video autoplay loop id="giphy" style="display:none;width:400px;height:400px;">
             <source id="giphySource" src="https://media1.giphy.com/media/kzyR9Mzm3eICaPj4ow/giphy.mp4?cid=e3b0c4426965a7b978dfd1aa9abdd9c932698b60086676c8&rid=giphy.mp4" />
         </video>
     </div>

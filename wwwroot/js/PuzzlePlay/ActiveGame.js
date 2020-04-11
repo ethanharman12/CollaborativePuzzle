@@ -32,7 +32,7 @@ function startGame() {
     gameArea = new gameArea(canvasId, 20);
     puzzleGame = new puzzleGame(gameArea, image, isVideo, rowCount, columnCount, 500, 500, playerColor);
     puzzleGame.cutPieces();
-    puzzleGame.scatter(50, 900, 50, 700);
+    puzzleGame.scatter(50, 900, 50, 600);
 
     gameArea.addComponent(puzzleGame);
     connection = new signalR.HubConnectionBuilder().withUrl("/puzzleHub").build();

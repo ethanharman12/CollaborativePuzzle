@@ -29,22 +29,15 @@ namespace CollaborativePuzzle.Controllers
         [Route("/Game/{gameId}")]
         public IActionResult Index(string gameId)
         {
-            GameViewModel viewModel = GetDefaultGame();
-
             if (!string.IsNullOrEmpty(gameId))
             {
-                if (!Cache.TryGetValue(gameId, out viewModel))
+                if (Cache.TryGetValue(gameId, out GameViewModel viewModel))
                 {
-                    viewModel = GetDefaultGame();
+                    return View("ActiveGame", viewModel);
                 }
             }
 
-            return View("ActiveGame", viewModel);
-        }
-
-        public IActionResult Default()
-        {
-            return View("ActiveGame", GetDefaultGame());
+            return RedirectToAction("New");
         }
 
         public IActionResult New()
@@ -75,20 +68,6 @@ namespace CollaborativePuzzle.Controllers
             Cache.Set(game.GameId, game);
 
             return RedirectToAction("Index", new { game.GameId });
-        }
-
-        private GameViewModel GetDefaultGame()
-        {
-            return new GameViewModel
-            {
-                Title = "Puzzle",
-                GameId = "1234",
-                ImagePath = "~/Images/Emo Panflute Album Cover.jpg",
-                NumberOfColumns = 4,
-                NumberOfRows = 4,
-                DisplayPreview = true,
-                ImageFile = null
-            };
         }
     }
 }
