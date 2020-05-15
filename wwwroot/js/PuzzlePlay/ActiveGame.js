@@ -8,6 +8,8 @@ var currentPiece;
 var originalOffsetX = 0;
 var originalOffsetY = 0;
 
+var inLink = false;
+
 var playerColor = "#" + Math.floor(Math.random() * 1000);
 var distanceSendThreshold = 5;
 var currentDistance = 0;
@@ -199,13 +201,20 @@ function stopMoving(event) {
     }    
 }
 
-function gameOver() {
-    puzzleGame.complete();
-
-    gameArea.endGame();
+var linkUrl = $("#startLink").attr("href");
+var linkText = "New Puzzle";
+function gameOver() {     
+    
     gameArea.canvas.onmousedown = null;
     gameArea.canvas.onmousemove = null;
     gameArea.canvas.onmouseup = null;
+
+    gameArea.endGame();
+
+    showLink();
+    puzzleGame.complete();
+
+    //$("#newGameLink").show();
 }
 
 $(document).ready(function () {
@@ -248,4 +257,54 @@ function displayDebugParameters(touchEvent) {
     //$("#rectTop").text(rect.top);
     //$("#pieceX").text(puzzleGame.puzzle[0][0].x);
     //$("#pieceY").text(puzzleGame.puzzle[0][0].y);
+}
+
+var linkX = 400;
+var linkY = 400;
+var linkHeight;
+var linkWidth;
+
+this.showLink = function () {
+
+    var ctx = gameArea.canvas.getContext("2d");
+
+    ctx.beginPath();
+    ctx.rect(linkX - 20, linkY - 50, 200, 80);
+    ctx.fillStyle = "black";
+    ctx.fill();
+
+    //draw the link
+    ctx.font = '30px sans-serif';
+    ctx.fillStyle = "#ffffff";
+    ctx.fillText(linkText, linkX, linkY);
+    linkWidth = ctx.measureText(linkText).width;
+    linkHeight = 60;
+
+    //add mouse listeners
+    gameArea.canvas.addEventListener("mousemove", on_mousemove, false);
+    gameArea.canvas.addEventListener("click", on_click, false);
+};
+
+//check if the mouse is over the link and change cursor style
+function on_mousemove(ev) {
+    var x, y;
+    x = ev.offsetX;
+    y = ev.offsetY;
+
+    //is the mouse over the link?
+    if (x >= linkX - 20 && x <= linkX + 200 && y <= linkY + 30 && y >= linkY - 50) {
+        gameArea.canvas.style.cursor = "pointer";
+        inLink = true;
+    }
+    else {
+        gameArea.canvas.style.cursor = "default";
+        inLink = false;
+    }
+}
+
+//if the link has been clicked, go to link
+function on_click(e) {
+    if (inLink) {
+        window.location = linkText;
+    }
 }

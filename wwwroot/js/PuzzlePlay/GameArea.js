@@ -26,5 +26,5 @@
     this.endGame = function () {
         this.updateGameArea(this);
         clearInterval(this.interval);
-    };
+    };    
 }

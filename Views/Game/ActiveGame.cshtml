@@ -34,6 +34,7 @@
                     <img id="previewImage" width="200" height="200"
                          src="@String.Format("data:image/png;base64,{0}", Model.ImageString)" @if (!Model.DisplayPreview) { <text> style="display:none" </text> } />
                 }
+            @Html.ActionLink("Start a New Game", "New", "Game", null, new { id = "startLink", style = "display:none;" })
             </div>
             <div id="friendSection">
                 <h2>Friends:</h2>
