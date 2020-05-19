@@ -1,10 +1,19 @@
 ﻿function readURL(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
+        var filename = input.files[0].name;
 
-        reader.onload = function (e) {
-            $('#imagePreview').attr('src', e.target.result);
-            $('#imagePreview').show();
+        reader.onload = function (e) {            
+            var ext = filename.substring(filename.lastIndexOf('.') + 1);
+            var preview = '';
+
+            if (ext === 'mp4') {
+                preview = '#videoPreview';
+            } else {
+                preview = '#imagePreview';
+            }
+            $(preview).attr('src', e.target.result);
+            $(preview).show();
         };
 
         reader.readAsDataURL(input.files[0]); // convert to base64 string
@@ -17,28 +26,12 @@ $("#imageFile").change(function () {
 
 function loadGiphy(type) {
 
-    var title = $("#title").val();
-    //var apiKey = $("#giphyApiKey").val();
-
-    //$.get("https://api.giphy.com/v1/" + type + "s/random",
-    //    {
-    //        api_key: apiKey,
-    //        tag: title
-    //    })
-    //    .done(function (result) {
-    //        var giphyUrl = result.data.images["original"].mp4;
-    //        $("#giphySource").attr("src", giphyUrl);
-    //        var video = $("#giphy");
-    //        video.show();
-    //        video[0].load(giphyUrl);
-    //        video[0].play();
-
-    //        $("#giphyUrl").val(giphyUrl);
-    //    });
+    var search = $("#giphySearchParameter").val();
+    $("#title").val(search);
 
     $.get("/api/Giphy/GetRandom" + type,
         {
-            searchParameter: title
+            searchParameter: search
         })
         .done(function (giphyUrl) {
             $("#giphySource").attr("src", giphyUrl);
@@ -53,11 +46,14 @@ function loadGiphy(type) {
 
 function getGiphy() {
     loadGiphy("Gif");
-
 }
 
 function getSticker() {
     loadGiphy("Sticker");
+}
+
+function previewCut() {
+    
 }
 
 $(document).ready(function () {
@@ -66,4 +62,5 @@ $(document).ready(function () {
     $("#imageUrl").change(function () {
         $("#giphyUrl").val($("#imageUrl").val());
     });
+    $("#previewCut").click(previewCut);
 });
