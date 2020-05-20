@@ -46,6 +46,7 @@ namespace CollaborativePuzzle.Controllers
         }
 
         [HttpPost]
+        [RequestSizeLimit(52428800)]
         public IActionResult Create(GameViewModel game)
         {
             if(!string.IsNullOrEmpty(game.GiphyUrl))

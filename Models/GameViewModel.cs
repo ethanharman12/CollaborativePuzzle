@@ -20,6 +20,7 @@ namespace CollaborativePuzzle.Models
         public int NumberOfColumns { get; set; }
         public bool DisplayPreview { get; set; }
         public bool IsVideo { get; set; }
+        public bool IsMuted { get; set; }
 
         public string GiphyUrl { get; set; }
 

@@ -11,7 +11,7 @@
         <div class="form-group col-md-2">
             <label>Upload Image or Video:</label>
             <br />
-            <input type='file' id="imageFile" name="imageFile" />
+            <input type='file' id="imageFile" name="imageFile" style="width:inherit"/>
         </div>
         <div class="form-group col-md-2">
             <label>Random GIF:</label>
@@ -29,7 +29,7 @@
         </div>
         <div class="col-md-3">
             <img id="imagePreview" src="#" alt="your image" style="display:none;width:300px;height:300px;" />
-            <video loop id="videoPreview" autoplay muted width="300" height="300" style="display:none;">
+            <video loop id="videoPreview" autoplay width="300" height="300" style="display:none;">
                 <source src="" />
             </video>
             <video autoplay loop id="giphy" style="display:none;width:300px;height:300px;">
@@ -38,7 +38,10 @@
         </div>
     </div>
     <div class="row">
-        <div class="form-group col-md-4">
+        <div class="form-group col-md-1">
+        </div>
+
+        <div class="form-group col-md-3">
             <h3>Pieces</h3>
             <label>Puzzle Grid Size</label>
             <input type="number" name="numberOfRows" autocomplete="off" value="4" style="width:50px" required="required" /> x
@@ -47,28 +50,34 @@
             <input type="button" id="previewCut" value="Preview Cut" />*@
         </div>
 
-        <div class="form-group col-md-4">
+        <div class="form-group col-md-2">
             <h3>Name</h3>
             <label>Title</label>
             <input type="text" id="title" name="title" autocomplete="off" required="required" />
         </div>
     </div>
     <div class="row">
-        <div class="form-group">
+        <div class="form-group col-md-3">
             <h3>Advanced Settings</h3>
             <label>Display Preview</label>
             <input asp-for="DisplayPreview" value="true" checked="checked" />
+            <br />
+            <label>Mute Video</label>
+            <input asp-for="IsMuted" value="true" checked="checked" />
             @*<h3>Players</h3>
-                Max Players?
-                Private vs Public?
-                <h3>Restrictions</h3>
-                Limit # of snaps per user?
-                <h3>Misc</h3>
-                Celebration Type*@
+            Max Players?
+            Private vs Public?
+            <h3>Restrictions</h3>
+            Limit # of snaps per user?
+            <h3>Misc</h3>
+            Celebration Type*@
         </div>
-    </div>
-    <div class="row">
-        <input type="submit" value="Create" id="createButton" />
+        <div class="form-group col-md-1" style="text-align:center;position:relative;">
+            <input type="submit" value="Create" id="createButton"
+                   style="position: absolute;top: 40%;left: 25%;" />
+        </div>
+        <div class="form-group col-md-2">
+        </div>
     </div>
 </form>
 

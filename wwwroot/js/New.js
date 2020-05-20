@@ -3,20 +3,27 @@
         var reader = new FileReader();
         var filename = input.files[0].name;
 
-        reader.onload = function (e) {            
-            var ext = filename.substring(filename.lastIndexOf('.') + 1);
-            var preview = '';
+        if (input.files[0].size > 52428800) {
+            alert("Uploaded files must be less than 50 Mb");
+            input.value = '';
+        }
+        else {
+            reader.onload = function (e) {            
+                var ext = filename.substring(filename.lastIndexOf('.') + 1);
+                var preview = '';
 
-            if (ext === 'mp4') {
-                preview = '#videoPreview';
-            } else {
-                preview = '#imagePreview';
-            }
-            $(preview).attr('src', e.target.result);
-            $(preview).show();
-        };
+                var videoExtensions = ["GIF", "MIDI", "OGG", "AVI", "MP4", "WMV"];
+                if (videoExtensions.includes(ext.toUpperCase())) {
+                    preview = '#videoPreview';
+                } else {
+                    preview = '#imagePreview';
+                }
+                $(preview).attr('src', e.target.result);
+                $(preview).show();
+            };
 
-        reader.readAsDataURL(input.files[0]); // convert to base64 string
+            reader.readAsDataURL(input.files[0]); // convert to base64 string
+        }
     }
 }
 

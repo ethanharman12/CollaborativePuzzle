@@ -26,10 +26,10 @@ function startGame() {
     }
     
     userName = window.localStorage.getItem("userName");
-    if (!userName) {
+    while (!userName) {
         userName = prompt("User Name:");
-        window.localStorage.setItem("userName", userName);
     }
+    window.localStorage.setItem("userName", userName);
     
     gameArea = new gameArea(canvasId, 20);
     puzzleGame = new puzzleGame(gameArea, image, isVideo, rowCount, columnCount, 500, 500, playerColor);

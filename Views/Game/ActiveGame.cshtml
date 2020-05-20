@@ -18,7 +18,7 @@
             <div id="previewArea" class="row">                
                 @if (Model.IsVideo)
                 {
-                    <video loop id="previewImage" autoplay muted width="200" height="200">
+                    <video loop id="previewImage" @if (Model.IsMuted) { <text>muted</text> } autoplay width="200" height="200">
                         @if (!string.IsNullOrEmpty(Model.GiphyUrl))
                         {
                             <source src="@Model.GiphyUrl" />                        

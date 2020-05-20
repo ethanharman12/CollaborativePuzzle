@@ -147,3 +147,4 @@ C:\Projects\CollaborativePuzzle\CollaborativePuzzle\bin\Debug\netcoreapp3.1\Syst
 C:\Projects\CollaborativePuzzle\CollaborativePuzzle\obj\Debug\netcoreapp3.1\RefitStubs.g.cs
 C:\Projects\CollaborativePuzzle\CollaborativePuzzle\bin\Debug\netcoreapp3.1\GiphyDotNet.dll
 C:\Projects\CollaborativePuzzle\CollaborativePuzzle\obj\Debug\netcoreapp3.1\CollaborativePuzzle.MvcApplicationPartsAssemblyInfo.cache
+C:\Projects\CollaborativePuzzle\CollaborativePuzzle\bin\Debug\netcoreapp3.1\web.config
