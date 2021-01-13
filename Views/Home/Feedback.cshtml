@@ -1,0 +1,35 @@
+﻿@{
+    ViewData["Title"] = "Feedback";
+}
+
+<h1>Feedback</h1>
+
+<form asp-action="SubmitFeedback" asp-controller="Home" id="feedbackForm" enctype="multipart/form-data">
+    <div class="row">
+        <label>Your Email Address:</label>
+        <br />
+        <input type="text" id="emailAddress" name="emailAddress" autocomplete="off" placeholder="user@gmail.com" required="required" />
+    </div>
+    <div class="row">
+        <label>Subject:</label>
+        <br />
+        <input type="text" id="subject" name="subject" autocomplete="off" placeholder="Feedback" required="required" />
+    </div>
+    <div class="row">
+        <label>Message:</label>
+        <br />
+        <textarea id="message" name="message" autocomplete="off" placeholder="Everything is bad" required="required"></textarea>
+    </div>
+    <div class="row">
+        <input type="submit" value="Submit" />
+    </div>
+</form>
+Hey friends, I wanted to share something I've been making off and on for the past few months*.
+
+https://remotepuzzle.azurewebsites.net/
+
+It's a game where you you can put a puzzle together as a group - remotely. (Clever name, I know). It's pretty straightforward. You just upload an image^, select the number of pieces, create the game, and then send the link to your friends. For something a bit harder, you can find a GIF or short video to use as a puzzle.
+
+*This is still a work in progress, so you might run into some bugs. Let me know if you do and I'll try to get them fixed. Also I know it's ugly. Styling will come later...maybe.
+
+^I don't save any files that are uploaded. They are only temporarily on the website while the puzzle is being played.

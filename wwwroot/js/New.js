@@ -3,8 +3,8 @@
         var reader = new FileReader();
         var filename = input.files[0].name;
 
-        if (input.files[0].size > 52428800) {
-            alert("Uploaded files must be less than 50 Mb");
+        if (input.files[0].size > 10485760) {
+            alert("Uploaded files must be less than 10 Mb");
             input.value = '';
         }
         else {

@@ -6,16 +6,18 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using CollaborativePuzzle.Models;
+using System.Net.Mail;
+using Microsoft.Extensions.Configuration;
 
 namespace CollaborativePuzzle.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly IConfiguration Configuration;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IConfiguration configuration)
         {
-            _logger = logger;
+            Configuration = configuration;
         }
 
         public IActionResult Index()
@@ -27,6 +29,38 @@ namespace CollaborativePuzzle.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public IActionResult Feedback()
+        {
+            return View();
+        }
+
+        public IActionResult HowToPlay()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult SubmitFeedback(FeedbackViewModel feedback)
+        {
+            MailMessage mail = new MailMessage();
+            SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+
+            mail.From = new MailAddress(feedback.EmailAddress);
+            mail.To.Add(Configuration["RemotePuzzle:FeedbackEmailAddress"]);
+            mail.Subject = feedback.Subject;
+            mail.Body = "From " + feedback.EmailAddress + Environment.NewLine + feedback.Message;
+
+            SmtpServer.Port = 587;
+            SmtpServer.Credentials = new System.Net.NetworkCredential(
+                Configuration["RemotePuzzle:FeedbackEmailAddress"],
+                Configuration["RemotePuzzle:FeedbackPassword"]);
+            SmtpServer.EnableSsl = true;
+
+            SmtpServer.Send(mail);
+
+            return View("Feedback");
         }
     }
 }

@@ -75,3 +75,11 @@ body {
     padding:20px;
     margin:10px;
 }
+
+#feedbackForm div {
+    padding:20px;
+}
+
+#feedbackForm label {
+    padding-right:10px;
+}
