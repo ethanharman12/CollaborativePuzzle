@@ -52,11 +52,20 @@ namespace CollaborativePuzzle.Controllers
             if(!string.IsNullOrEmpty(game.GiphyUrl))
             {
                 game.IsVideo = true;
+                game.VideoSrc = game.GiphyUrl;
+            }
+            else if (game.ImageFile != null)
+            {
+                game.ImageString = game.GetFileString();
+                game.IsVideo = game.GetIsVideo(game.ImageFile.FileName);
+                game.VideoSrc = String.Format("data:video/mp4;base64,{0}", game.ImageString);
+                game.ImageSrc = String.Format("data:image/png;base64,{0}", game.ImageString);
             }
             else
             {
-                game.ImageString = game.GetFileString();
-                game.IsVideo = game.GetIsVideo();
+                game.IsVideo = game.GetIsVideo(game.LinkUrl);
+                game.VideoSrc = game.LinkUrl;
+                game.ImageSrc = game.LinkUrl;
             }
             
             game.GameId = game.Title.Replace(" ", string.Empty);

@@ -8,18 +8,8 @@
             input.value = '';
         }
         else {
-            reader.onload = function (e) {            
-                var ext = filename.substring(filename.lastIndexOf('.') + 1);
-                var preview = '';
-
-                var videoExtensions = ["GIF", "MIDI", "OGG", "AVI", "MP4", "WMV"];
-                if (videoExtensions.includes(ext.toUpperCase())) {
-                    preview = '#videoPreview';
-                } else {
-                    preview = '#imagePreview';
-                }
-                $(preview).attr('src', e.target.result);
-                $(preview).show();
+            reader.onload = function (e) {
+                previewPuzzle(e.target.result, isVideo(filename));
             };
 
             reader.readAsDataURL(input.files[0]); // convert to base64 string
@@ -30,6 +20,12 @@
 $("#imageFile").change(function () {
     readURL(this);
 });
+
+function isVideo(filename) {
+    var ext = filename.substring(filename.lastIndexOf('.') + 1);
+    var videoExtensions = ["GIF", "MIDI", "OGG", "AVI", "MP4", "WMV"];
+    return videoExtensions.includes(ext.toUpperCase());
+}
 
 function loadGiphy(type) {
 
@@ -63,11 +59,24 @@ function previewCut() {
     
 }
 
+function previewPuzzle(source, filename) {
+    var preview = '';
+
+    if (isVideo(filename)) {
+        preview = '#videoPreview';
+    } else {
+        preview = '#imagePreview';
+    }
+    $(preview).attr('src', source);
+    $(preview).show();
+}
+
 $(document).ready(function () {
     $("#giphyButton").click(getGiphy);
     $("#stickerButton").click(getSticker);
-    $("#imageUrl").change(function () {
-        $("#giphyUrl").val($("#imageUrl").val());
+    $("#linkUrl").change(function () {
+        var filename = $("#linkUrl").val();
+        previewPuzzle(filename, filename);
     });
     $("#previewCut").click(previewCut);
 });

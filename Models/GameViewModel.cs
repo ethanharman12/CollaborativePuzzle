@@ -11,6 +11,7 @@ namespace CollaborativePuzzle.Models
     {
         public string GameId { get; set; }
         public string ImagePath { get; set; }
+        public string LinkUrl { get; set; }
         public string Title { get; set; }
         public IFormFile ImageFile { get; set; }
         public string ImageString { get; set; }
@@ -23,6 +24,9 @@ namespace CollaborativePuzzle.Models
         public bool IsMuted { get; set; }
 
         public string GiphyUrl { get; set; }
+
+        public string ImageSrc { get; set; }
+        public string VideoSrc { get; set; }
 
         public GameViewModel()
         {
@@ -47,9 +51,9 @@ namespace CollaborativePuzzle.Models
             ".GIF", ".MIDI", ".OGG", ".AVI", ".MP4", ".WMV"
         };
 
-        public bool GetIsVideo()
+        public bool GetIsVideo(string fileName)
         {
-            return videoExtensions.Contains(Path.GetExtension(ImageFile.FileName), StringComparer.OrdinalIgnoreCase);
+            return videoExtensions.Contains(Path.GetExtension(fileName), StringComparer.OrdinalIgnoreCase);
         }
     }
 }

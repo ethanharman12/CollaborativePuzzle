@@ -18,21 +18,14 @@
             <div id="previewArea" class="row">                
                 @if (Model.IsVideo)
                 {
-                    <video loop id="previewImage" @if (Model.IsMuted) { <text>muted</text> } autoplay width="200" height="200">
-                        @if (!string.IsNullOrEmpty(Model.GiphyUrl))
-                        {
-                            <source src="@Model.GiphyUrl" />                        
-                        }
-                        else
-                        {
-                            <source src="@String.Format("data:video/mp4;base64,{0}", Model.ImageString)" />                        
-                        }
+                    <video loop id="previewImage" @if (Model.IsMuted) { <text>muted</text> } autoplay width="200" height="200">                       
+                        <source src="@Model.VideoSrc" />                        
                     </video>
                 }
                 else
                 {
                     <img id="previewImage" width="200" height="200"
-                         src="@String.Format("data:image/png;base64,{0}", Model.ImageString)" @if (!Model.DisplayPreview) { <text> style="display:none" </text> } />
+                         src="@Model.ImageSrc" @if (!Model.DisplayPreview) { <text> style="display:none" </text> } />
                 }
             @Html.ActionLink("Start a New Game", "New", "Game", null, new { id = "startLink", style = "display:none;" })
             </div>

@@ -1,21 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Projects\\CollaborativePuzzle\\CollaborativePuzzle\\CollaborativePuzzle.csproj": {}
+    "C:\\Users\\ethan\\source\\repos\\ethanharman12\\CollaborativePuzzle\\CollaborativePuzzle.csproj": {}
   },
   "projects": {
-    "C:\\Projects\\CollaborativePuzzle\\CollaborativePuzzle\\CollaborativePuzzle.csproj": {
+    "C:\\Users\\ethan\\source\\repos\\ethanharman12\\CollaborativePuzzle\\CollaborativePuzzle.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Projects\\CollaborativePuzzle\\CollaborativePuzzle\\CollaborativePuzzle.csproj",
+        "projectUniqueName": "C:\\Users\\ethan\\source\\repos\\ethanharman12\\CollaborativePuzzle\\CollaborativePuzzle.csproj",
         "projectName": "CollaborativePuzzle",
-        "projectPath": "C:\\Projects\\CollaborativePuzzle\\CollaborativePuzzle\\CollaborativePuzzle.csproj",
+        "projectPath": "C:\\Users\\ethan\\source\\repos\\ethanharman12\\CollaborativePuzzle\\CollaborativePuzzle.csproj",
         "packagesPath": "C:\\Users\\ethan\\.nuget\\packages\\",
-        "outputPath": "C:\\Projects\\CollaborativePuzzle\\CollaborativePuzzle\\obj\\",
+        "outputPath": "C:\\Users\\ethan\\source\\repos\\ethanharman12\\CollaborativePuzzle\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
           "C:\\Users\\ethan\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -31,6 +30,7 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
             "projectReferences": {}
           }
         },
@@ -42,14 +42,15 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "dependencies": {
             "Azure.Identity": {
               "target": "Package",
               "version": "[1.1.1, )"
             },
-            "GiphyDotNet": {
+            "ByteDev.Giphy": {
               "target": "Package",
-              "version": "[2.0.0, )"
+              "version": "[5.0.1, )"
             },
             "Microsoft.AspNet.SignalR.JS": {
               "target": "Package",
@@ -98,6 +99,12 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x86",
+              "version": "[3.1.12, 3.1.12]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -106,7 +113,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files (x86)\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
         }
       }
     }

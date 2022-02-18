@@ -227,7 +227,12 @@ $(document).ready(function () {
         image.addEventListener('play', startGame, false);
     }
     else {
-        startGame();
+        if (image.complete) {
+            startGame();
+        }
+        else {
+            image.onload = startGame;
+        }
     }
 });
 
