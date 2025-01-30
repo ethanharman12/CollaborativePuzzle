@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using CollaborativePuzzle.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using CollaborativePuzzle.Models;
-using System.Net.Mail;
 using Microsoft.Extensions.Configuration;
+using System;
+using System.Diagnostics;
+using System.Net.Mail;
 
 namespace CollaborativePuzzle.Controllers
 {

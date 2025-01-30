@@ -40,6 +40,7 @@ namespace CollaborativePuzzle.Controllers
             return RedirectToAction("New");
         }
 
+        [Route("/Game/New")]
         public IActionResult New()
         {
             return View();
@@ -47,6 +48,7 @@ namespace CollaborativePuzzle.Controllers
 
         [HttpPost]
         [RequestSizeLimit(10485760)]
+        [Route("/Game/Create")]
         public IActionResult Create(GameViewModel game)
         {
             if(!string.IsNullOrEmpty(game.GiphyUrl))
